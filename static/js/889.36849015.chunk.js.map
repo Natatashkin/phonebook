@@ -1,1 +1,1 @@
-{"version":3,"file":"static/js/889.36849015.chunk.js","mappings":"gMACA,EADkB,kBAAM","sources":["pages/StartPage/StartPage.jsx"],"sourcesContent":["const StartPage = () => <div>StartPage</div>;\r\nexport default StartPage;\r\n"],"names":[],"sourceRoot":""}
+{"version":3,"file":"static/js/889.36849015.chunk.js","mappings":"gMACA,EADkB,kBAAM","sources":["pages/StartPage/StartPage.jsx"],"sourcesContent":["const StartPage = () => <div>StartPage</div>;\nexport default StartPage;\n"],"names":[],"sourceRoot":""}
