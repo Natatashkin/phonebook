@@ -4,10 +4,11 @@ const baseUrl = 'https://connections-api.herokuapp.com';
 
 export const authApi = createApi({
   reducerPath: 'authApi',
+  tagTypes: ['Contact'],
   baseQuery: fetchBaseQuery({
     baseUrl,
     prepareHeaders: (headers, { getState }) => {
-      const token = getState().authentication.token;
+      const token = getState().auth.token;
 
       if (token) {
         headers.set('authorization', `Bearer ${token}`);
@@ -16,6 +17,7 @@ export const authApi = createApi({
       return headers;
     },
   }),
+
   endpoints: builder => ({
     register: builder.mutation({
       query: body => ({
@@ -36,22 +38,56 @@ export const authApi = createApi({
         url: '/users/logout',
         method: 'POST',
       }),
+      invalidatesTags: ['Contact'],
     }),
-    refresh: builder.query({
+    // refresh: builder.query({
+    //   query: () => ({
+    //     url: '/users/current',
+    //     method: 'GET',
+    //   }),
+    // }),
+    // Contacts
+    getContacts: builder.query({
       query: () => ({
-        url: '/users/current',
+        url: `/contacts`,
         method: 'GET',
       }),
+      providesTags: ['Contact'],
+    }),
+    addContact: builder.mutation({
+      query: body => ({
+        url: '/contacts',
+        method: 'POST',
+        body,
+      }),
+      invalidatesTags: ['Contact'],
+    }),
+    removeContact: builder.mutation({
+      query: contactId => ({
+        url: `/contacts/${contactId}`,
+        method: 'DELETE',
+      }),
+      invalidatesTags: ['Contact'],
+    }),
+    editContact: builder.mutation({
+      query: ({ body }) => ({
+        url: `/contacts/${body.id}`,
+        method: 'PUTCH',
+      }),
+      invalidatesTags: ['Contact'],
     }),
   }),
 });
 
-export default authApi;
-// Export hooks for usage in functional components, which are
-// auto-generated based on the defined endpoints
 export const {
   useRegisterMutation,
   useLoginMutation,
   useLogoutMutation,
   useRefreshQuery,
+  useGetContactsQuery,
+  useAddContactMutation,
+  useRemoveContactMutation,
+  useEditContactMutation,
 } = authApi;
+
+export default authApi;

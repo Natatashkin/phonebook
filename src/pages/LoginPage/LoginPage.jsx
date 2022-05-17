@@ -9,7 +9,7 @@ const LoginPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const [logInUser, data] = useLoginMutation();
+  const [logInUser] = useLoginMutation();
 
   const handleChange = ({ target: { name, value } }) => {
     switch (name) {
@@ -21,7 +21,7 @@ const LoginPage = () => {
         return;
     }
   };
-  console.log(data);
+
   const handleSubmit = async e => {
     e.preventDefault();
     try {
@@ -38,6 +38,8 @@ const LoginPage = () => {
       }
 
       dispatch(setAuthCredentials({ username, token }));
+
+      // authApi.endpoints.getContacts.initiate();
     } catch (error) {
       console.log(error);
       return;

@@ -29,17 +29,14 @@ const RegisterPage = () => {
     try {
       const credentials = await registerUser({ name, email, password });
       const {
-        data: {
-          user: { name: username },
-          token,
-        },
+        data: { token },
       } = credentials;
-      console.log(username);
+
       if (!token) {
         throw Error('ошибка фетча, нет записи в слайс');
       }
 
-      dispatch(setAuthCredentials({ username, token }));
+      dispatch(setAuthCredentials({ token }));
     } catch (error) {
       console.log(error);
       return;

@@ -1,11 +1,12 @@
 import { Suspense } from 'react';
 import { Outlet } from 'react-router-dom';
+
 import AppBar from 'components/AppBar';
 
-const Layout = () => {
+const Layout = ({ username = '' }) => {
   return (
     <>
-      <AppBar />
+      <AppBar username={username} />
       <main>
         <Suspense fallback={<div>Загрузка...</div>}>
           <Outlet />

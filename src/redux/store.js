@@ -17,7 +17,6 @@ import authSlice from 'redux/auth/authSlice';
 const persistConfig = {
   key: 'auth',
   storage,
-  whitelist: ['token'],
 };
 
 const persistedReducer = persistReducer(persistConfig, authSlice.reducer);
@@ -25,7 +24,7 @@ const persistedReducer = persistReducer(persistConfig, authSlice.reducer);
 export const store = configureStore({
   reducer: {
     [authApi.reducerPath]: authApi.reducer,
-    authentication: persistedReducer,
+    auth: persistedReducer,
   },
   middleware: getDefaultMiddleware => [
     ...getDefaultMiddleware({

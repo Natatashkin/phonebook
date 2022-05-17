@@ -1,11 +1,8 @@
-import { lazy, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { lazy } from 'react';
 import Layout from 'pages/Layout';
 import { Routes, Route, Navigate } from 'react-router-dom';
-import PrivateRoute from './customRotes/PrivateRoute';
-import PublicRoute from './customRotes/PublicRoute';
-import { useRefreshQuery } from 'services/authApi';
-import { refreshUser } from 'redux/auth/authSlice';
+import PrivateRoute from './customRoutes/PrivateRoute';
+import PublicRoute from './customRoutes/PublicRoute';
 
 const StartPage = lazy(() => import('pages/StartPage'));
 const LoginPage = lazy(() => import('pages/LoginPage'));
@@ -13,13 +10,6 @@ const RegisterPage = lazy(() => import('pages/RegisterPage'));
 const ContactsPage = lazy(() => import('pages/ContactsPage'));
 
 export const App = () => {
-  const dispatch = useDispatch();
-  const { data } = useRefreshQuery();
-
-  useEffect(() => {
-    data && dispatch(refreshUser(data.name));
-  }, [data, dispatch]);
-
   return (
     <Routes>
       <Route path="/" element={<Layout />}>

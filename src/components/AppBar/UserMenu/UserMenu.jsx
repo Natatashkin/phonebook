@@ -1,8 +1,8 @@
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useLogoutMutation } from 'services/authApi';
 import { removeToken } from 'redux/auth/authSlice';
 
-const UserMenu = () => {
+const UserMenu = ({ username = '' }) => {
   const dispatch = useDispatch();
   const [logoutUser] = useLogoutMutation();
 
@@ -11,7 +11,6 @@ const UserMenu = () => {
     dispatch(removeToken());
   };
 
-  const username = useSelector(state => state.authentication.username);
   return (
     <div>
       <span>{username}</span>
